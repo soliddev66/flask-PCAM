@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block mainContent %}
+
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <title>PCAM Assessment</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <fieldset>
+        <legend>Assessment category</legend>
+
+        <label class = "Green" for="rountineCare">Rountine Care</label>
+        <input type = "radio" name="assessmentCategory" id="rountineCare" value="rountineCare" checked="checked"/>
+
+        <label class = "Yellow" for="activeMonitoring">Active Monitoring</label>
+        <input type ="radio" name="assessmentCategory" id="activeMonitoring" value="activeMonitoring">
+
+        <label class = "Orange" for="planAction">Plan Action</label>
+        <input type = "radio" name="assessmentCategory" id="planAction" value="planAction"/>
+
+        <label class ="Red" for="actNow">Act Now</label>
+        <input type ="radio" name="assessmentCategory" id="actNow" value="actNow"/>
+    </fieldset>
+
+    <div></div>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Creating the master Tkinter window
+master = TK()
+master.geometry("175x175")
+
+#Tkinter string variable
+v = StringVar(master, "1")
+
+#dictionary to create multiple buttons
+values = {
+    "Rountine Care": "1"
+    "Active Monitoring": "2"
+    "Plan Action": "3"
+    "Act Now": "4"
+}
+#loop is used to create multiple radiobuttons
+for (text, value) in values.items():
+    Radiobutton(master, text = text, variable = v, value = value).pack(side = TOP, ipady = 5)
+
+mainloop()
+
+    

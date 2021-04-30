@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block mainContent %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PCAM Assessment</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+          }
+
+          a:hover {
+            background-color: #ddd;
+            color: black;
+          }
+
+          .previous {
+            background-color: #f1f1f1;
+            color: black;
+          }
+
+          .next {
+            background-color: #4CAF50;
+            color: white;
+          }
+    </style>
+</head>
+
+<body>
+    <div>
+    <h1>Social Environment</h1>
+        <ol>
+            <li>
+                <p>How would you rate their home environment in terms of safety and stability (including domestic violence, insecure housing, neighbor harassment)?</p>
+            </li>
+
+            <label for="Options"> Choose the option that best describes the situation:</label>
+                <select name="Options" id="Options">
+                    <option value="option 1">Consistently safe, supportive, stable, no identified problems</option>
+                    <option value="option 2">Safe, stable, but with some inconsistency</option>
+                    <option value="optionn 3">Safety/stability questionable</option>
+                    <option value="option 4"> Unsafe and unstable</option>
+                </select>
+                <br>
+
+            <li>
+                <p>How do daily activities impact on the client's well-being? (include current or anticipated unemployment, work, caregiving, access to transportation or other)</p>
+            </li>
+
+            <label for="Options">Choose the option that best describes the situation</label>
+                <select name="Options" id="Options">
+                    <option value="option 1">No identified problems or perceived positive benefits</option>
+                    <option value="option 2">Some general dissatisfaction but no concern</option>
+                    <option value="option 3">Contributes to low mood or stress at times</option>
+                    <option value="option 4">Severe impact on poor mental well-being</option>
+                </select>
+                <br>
+
+            <li>
+                <p>How would you rate their social network (family, work, friends)?</p>
+            </li>
+
+            <label for="Options">Choose the option that best describes the situation</label>
+                <select name="Options" id="Options">
+                    <option value="option 1">Good participation with social networks</option>
+                    <option value="option 2">Adequate participation with social networks</option>
+                    <option value="option 3">Restricted participation with some degree of social isolation</option>
+                    <option value="option 4">Little participation, lonely and socially isolated</option>
+                </select>
+                <br>
+
+            <li>
+                <p>How would you rate their financial resources (including ability to afford all required medical care)?</p>
+            </li>
+
+            <label for="Options">Choose the option that best describes the situation</label>
+                <select name="Options" id="Options">
+                    <option value="option 1">Financially secure, resources adequate, no identified problems</option>
+                    <option value="option 2">Financially secure, some resource challenges</option>
+                    <option value="option 3">Financially insecure, some resource challenges</option>
+                    <option value="option 4">Financially insecure, very few resources, immediate challenges</option>
+                </select>
+
+        </ol>
+
+    </div>
+    <br>
+    <div>
+        <label for="Notes" class="required">Notes:</label>
+        <form action="notes" method="POST" id="notes"></form>
+            <input type="text">
+    </div>
+    <br>
+    <fieldset>
+        <legend>Assessment category</legend>
+
+        <label class = "Green" for="rountineCare">Rountine Care</label>
+        <input type = "radio" name="assessmentCategory" id="rountineCare" value="rountineCare" checked="checked"/>
+
+        <label class = "Yellow" for="activeMonitoring">Active Monitoring</label>
+        <input type ="radio" name="assessmentCategory" id="activeMonitoring" value="activeMonitoring">
+
+        <label class = "Orange" for="planAction">Plan Action</label>
+        <input type = "radio" name="assessmentCategory" id="planAction" value="planAction"/>
+
+        <label class ="Red" for="actNow">Act Now</label>
+        <input type ="radio" name="assessmentCategory" id="actNow" value="actNow"/>
+    </fieldset>
+    <br>
+    <p id="patientID1">{{ ptid }}</p>
+    <button id="p2_prevBtn" class="previous">&laquo; Previous</button>
+    <button id="p2_nextBtn" class="next">Next &raquo;</button>
+    <!-- <a href="p1.html" class="previous">&laquo; Previous</a>
+    <a href="p3.html" class="next">Next</a> -->
+</body>
+{% endblock %}

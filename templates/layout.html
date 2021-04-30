@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PCAM APPLICATION</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+    <div class="navbar">
+        <a href="/">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">Patient
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('patient_list') }}">View Patient List</a>
+                <a href="/patient_select">Add New Patient</a>
+            </div>
+        </div>
+        <a href="#news">Provider</a>
+        <input id="healthcardNo" type="text" tabindex="1" />
+      </div>
+</head>
+<body>
+    <h1>PCAM App</h1>
+    {% block mainContent %}
+    {% endblock %}
+    <footer>This is a common footer</footer>
+</body>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+<script src="{{ url_for('static', filename='js/filter.js') }}"></script>
+<script>
+    $(function() {
+        $("#autoComplete").autocomplete({
+            source:function(request, response) {
+                $.getJSON("{{url_for('autocompletebyname')}}",{
+                    q: request.term, // in flask, "q" will be the argument to look for using request.args
+                }, function(data) {
+                    response(data); // matching_results from jsonify
+                });
+            },
+            minLength: 2,
+            select: function(event, ui) {
+                console.log(ui.item.value); // not in your question, but might help later
+                //FilterByName();
+            }
+        });
+
+        $("#healthcardNo").autocomplete({
+            source:function(request, response) {
+                $.getJSON("{{url_for('autocompletebyhealthcard')}}",{
+                    q: request.term, // in flask, "q" will be the argument to look for using request.args
+                }, function(data) {
+                    response(data); // matching_results from jsonify
+                });
+            },
+            minLength: 2,
+            select: function(event, ui) {
+                console.log(ui.item.value); // not in your question, but might help later
+                //FilterByName();
+            }
+        });
+
+
+        $("#p1_btn").click(function() {
+            const rbs = document.querySelectorAll('input[type=radio]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            var patientId = $('#patientID').text();
+            switch(selectedValue) {
+                case 'rountineCare':
+                    $.ajax({
+                        url : '/p1/' + patientId + '/0',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "social_environment?id=" + data;
+                        }
+                    });
+                    break;
+                case 'activeMonitoring':
+                    $.ajax({
+                        url : '/p1/' + patientId + '/1',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "social_environment?id=" + data;
+                        }
+                    });
+                    break;
+                case 'planAction':
+                    $.ajax({
+                        url : '/p1/' + patientId + '/2',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "social_environment?id=" + data;
+                        }
+                    });
+                    break;
+                case 'actNow':
+                    $.ajax({
+                        url : '/p1/' + patientId + '/3',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "social_environment?id=" + data;
+                        }
+                    });
+                    break;
+            }
+
+        });
+
+        $("#p2_prevBtn").click(function() {
+            const rbs = document.querySelectorAll('input[type=radio]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            var patientId = $('#patientID1').text();
+            switch(selectedValue) {
+                case 'rountineCare':
+                    $.ajax({
+                        url : '/p2/' + patientId + '/0',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_and_wellbeing?id=" + data;
+                        }
+                    });
+                    break;
+                case 'activeMonitoring':
+                    $.ajax({
+                        url : '/p2/' + patientId + '/1',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_and_wellbeing?id=" + data;
+                        }
+                    });
+                    break;
+                case 'planAction':
+                    $.ajax({
+                        url : '/p2/' + patientId + '/2',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_and_wellbeing?id=" + data;
+                        }
+                    });
+                    break;
+                case 'actNow':
+                    $.ajax({
+                        url : '/p2/' + patientId + '/3',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_and_wellbeing?id=" + data;
+                        }
+                    });
+                    break;
+            }
+
+        });
+
+        $("#p2_nextBtn").click(function() {
+            const rbs = document.querySelectorAll('input[type=radio]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            var patientId = $('#patientID1').text();
+            switch(selectedValue) {
+                case 'rountineCare':
+                    $.ajax({
+                        url : '/p2/' + patientId + '/0',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_lit_comm?id=" + data;
+                        }
+                    });
+                    break;
+                case 'activeMonitoring':
+                    $.ajax({
+                        url : '/p2/' + patientId + '/1',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_lit_comm?id=" + data;
+                        }
+                    });
+                    break;
+                case 'planAction':
+                    $.ajax({
+                        url : '/p2/' + patientId + '/2',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_lit_comm?id=" + data;
+                        }
+                    });
+                    break;
+                case 'actNow':
+                    $.ajax({
+                        url : '/p2/' + patientId + '/3',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_lit_comm?id=" + data;
+                        }
+                    });
+                    break;
+            }
+
+        });
+
+        $("#p3_prevBtn").click(function() {
+            const rbs = document.querySelectorAll('input[type=radio]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            var patientId = $('#patientID2').text();
+            switch(selectedValue) {
+                case 'rountineCare':
+                    $.ajax({
+                        url : '/p3/' + patientId + '/0',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "social_environment?id=" + data;
+                        }
+                    });
+                    break;
+                case 'activeMonitoring':
+                    $.ajax({
+                        url : '/p3/' + patientId + '/1',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "social_environment?id=" + data;
+                        }
+                    });
+                    break;
+                case 'planAction':
+                    $.ajax({
+                        url : '/p3/' + patientId + '/2',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "social_environment?id=" + data;
+                        }
+                    });
+                    break;
+                case 'actNow':
+                    $.ajax({
+                        url : '/p3/' + patientId + '/3',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "social_environment?id=" + data;
+                        }
+                    });
+                    break;
+            }
+
+        });
+
+        $("#p3_nextBtn").click(function() {
+            const rbs = document.querySelectorAll('input[type=radio]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            var patientId = $('#patientID2').text();
+            switch(selectedValue) {
+                case 'rountineCare':
+                    $.ajax({
+                        url : '/p3/' + patientId + '/0',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "service_coordination?id=" + data;
+                        }
+                    });
+                    break;
+                case 'activeMonitoring':
+                    $.ajax({
+                        url : '/p3/' + patientId + '/1',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "service_coordination?id=" + data;
+                        }
+                    });
+                    break;
+                case 'planAction':
+                    $.ajax({
+                        url : '/p3/' + patientId + '/2',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "service_coordination?id=" + data;
+                        }
+                    });
+                    break;
+                case 'actNow':
+                    $.ajax({
+                        url : '/p3/' + patientId + '/3',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "service_coordination?id=" + data;
+                        }
+                    });
+                    break;
+            }
+
+        });
+
+        $("#p4_prevBtn").click(function() {
+            const rbs = document.querySelectorAll('input[type=radio]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            var patientId = $('#patientID3').text();
+            switch(selectedValue) {
+                case 'rountineCare':
+                    $.ajax({
+                        url : '/p4/' + patientId + '/0',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_lit_comm?id=" + data;
+                        }
+                    });
+                    break;
+                case 'activeMonitoring':
+                    $.ajax({
+                        url : '/p4/' + patientId + '/1',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_lit_comm?id=" + data;
+                        }
+                    });
+                    break;
+                case 'planAction':
+                    $.ajax({
+                        url : '/p4/' + patientId + '/2',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_lit_comm?id=" + data;
+                        }
+                    });
+                    break;
+                case 'actNow':
+                    $.ajax({
+                        url : '/p4/' + patientId + '/3',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "health_lit_comm?id=" + data;
+                        }
+                    });
+                    break;
+            }
+
+        });
+
+        $("#p4_nextBtn").click(function() {
+            const rbs = document.querySelectorAll('input[type=radio]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            var patientId = $('#patientID3').text();
+            switch(selectedValue) {
+                case 'rountineCare':
+                    $.ajax({
+                        url : '/p4/' + patientId + '/0',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "patient_select"
+                        }
+                    });
+                    break;
+                case 'activeMonitoring':
+                    $.ajax({
+                        url : '/p4/' + patientId + '/1',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "patient_select"
+                        }
+                    });
+                    break;
+                case 'planAction':
+                    $.ajax({
+                        url : '/p4/' + patientId + '/2',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "patient_select"
+                        }
+                    });
+                    break;
+                case 'actNow':
+                    $.ajax({
+                        url : '/p4/' + patientId + '/3',
+                        type: "get",
+                        success: function( data ) {
+                            window.location.href = "patient_select"
+                        }
+                    });
+                    break;
+            }
+        });
+
+
+    })
+</script>
+</html>
+
+

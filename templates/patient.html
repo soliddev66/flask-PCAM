@@ -1,0 +1,36 @@
+
+{% extends "layout.html" %}
+{% block mainContent %}
+    <div>
+        <label for="id">Id:</label>
+        <input type="text" value="{{ patient['id'] }}" id="id" name="id">
+    </div>
+    <div>
+        <label for="firstname">FirstName:</label>
+        <input type="text" value="{{patient['firstname']}}" id="firstname" name="firstname">
+    </div>
+    <div>
+        <label for="lastname">LastName:</label>
+        <input type="text" value="{{ patient['lastname'] }}" id="lastname" name="lastname">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="text" value="{{ patient['email'] }}" id="Email" name="Email">
+    </div>
+    <div>
+        <label for="dob">DOB:</label>
+        <input type="text" value="{{ patient['date_'] }}" id="dob" name="dob">
+    </div>
+    <div>
+        <label for="address">Address:</label>
+        <input type="text" value="{{ patient['address'] }}" id="address" name="address">
+    </div>
+    <div>
+        <label for="healthcardno">HealthCardNo:</label>
+        <input type="text" value="{{ patient['healthcardno'] }}" id="healthcardno" name="healthcardno">
+    </div>
+    <div>
+        <a href="{{ url_for('summary_notes')}}" style="margin-right: 30px;">Summary notes</a>
+        <a href="{{ url_for('patient_list')}}">Back</a>
+    </div>
+{% endblock %}

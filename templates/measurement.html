@@ -1,0 +1,13 @@
+{% extends "layout.html" %}
+{% block mainContent %}
+    <div>
+        <h3>{{patient.firstName}}'s vitals measurement {{measurement.id}}:</h3>
+        <div class="measurement-details">
+            Vitals recorded on {{measurement.time_recorded}} 
+             BP: {{measurement.systolic}}/{{measurement.diastolic}}, P: {{measurement.pulse}}
+        </div>
+    </div>
+    <p>
+        Return <a rel="home" href="{{ url_for('patient',ptid=patient.id)}}">to {{patient.firstName}}'s record</a>.
+    </p>
+{% endblock %}

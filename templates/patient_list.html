@@ -1,0 +1,30 @@
+
+{% extends "layout.html" %}
+{% block mainContent %}
+    <div>
+      Patient Page
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in patients %}
+            <tr>
+              <td>{{ patient['firstname'] }}</td>
+              <td>{{ patient['lastname'] }}</td>
+              <td>{{ patient['email'] }}</td>
+              <td>
+                <a href="{{ url_for('patient', ptid=patient['id']) }}">View</a>
+              </td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{{ url_for('root')}}">Home</a>
+    <a href="{{ url_for('select_patient')}}">Back</a>
+{% endblock %}

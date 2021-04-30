@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% block mainContent %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PCAM Assessment</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+        a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+          }
+
+          a:hover {
+            background-color: #ddd;
+            color: black;
+          }
+
+          .previous {
+            background-color: #f1f1f1;
+            color: black;
+          }
+
+          .next {
+            background-color: #4CAF50;
+            color: white;
+          }
+    </style>
+</head>
+
+<body>
+    <div>
+    <h1>Health and Well-being</h1>
+    <ol>
+            <li>
+                <p>Thinking about your client's physical health needs, are there any symptoms or problems(risk indicators) you are unsure about that require further investigation?</p>
+            </li>
+
+        <label for="Options"> Choose the option that best describes the situation:</label>
+            <select name="Options" id="Options">
+                <option value="option 1">No identified areas of uncertainty or problems already being investigated</option>
+                <option value="option 2">Mild vague physical symptoms or problems; but do not impact on daily life or are not of concern to client</option>
+                <option value="option 3">Mild to severe symptoms or problems that impact on daily life</option>
+                <option value="option 4">Severe symptoms or problems that cause significant impact on daily life</option>
+            </select>
+            <br>
+            <li>
+                <p>Are the client's physical health problems impacting on their mental well-being?</p>
+            </li>
+
+        <label for ="Options">Choose the option that best describes the situation:</label>
+            <select name="Options" id="Options">
+                <option value="option 1">No identified areas of concern</option>
+                <option value="option 2">Mild impact on mental well-being e.g "feeling fed-up", "reduced enjoyment"</option>
+                <option value="option 3">Moderate to severe impact upon mental well-being and preventing enjoyment of usual activities</option>
+                <option value="option 4">Severe impact upon mental well-being and preventing engagement with usual activities</option>
+            </select>
+            <br>
+            <li>
+                <p>Are there any problems with your client's lifestyle behaviours (alcohol, drugs, diet, exercise) that are impacting on physical or mental well-being?</p>
+            </li>
+        <label for="Options">Choose the best option that best describes the situation:</label>
+            <select name="Options" id="Options">
+                <option value="option 1">No identified areas of concern</option>
+                <option value="option 2">Some mild concern of potential negative impact on well-being</option>
+                <option value="option 3">Mod to severe impact on client's well-being, preventing enjoyment of usual activities</option>
+                <option value="option 4">Severe impact on client's well-being with additional potential impact on others</option>
+            </select>
+            <br>
+
+            <li>
+                <p>Do you have any other concerns about your client's mental well-being? How would you rate their severity and impact on the client?</p>
+            </li>
+
+        <label for="Options">Choose the option that best describes the situation:</label>
+            <select name="Options" id="Options">
+                <option value="option 1">No identified areas of concern</option>
+                <option value="option 2">Mild problems- don't interfer with function</option>
+                <option value="option 3">Mod to severe problems that interfere with function</option>
+                <option value="option 4">Severe problems impairing most daily functions</option>
+            </select>
+    </ol>
+    </div>
+    <br>
+    <div>
+        <label for="Notes" class="required">Notes:</label>
+        <form action="notes" method="POST" id="notes"></form>
+            <input type="text">
+    </div>
+    <fieldset>
+        <legend>Assessment category</legend>
+
+        <label class = "Green" for="rountineCare">Rountine Care</label>
+        <input type = "radio" name="assessmentCategory" id="rountineCare" value="rountineCare" checked="checked"/>
+
+        <label class = "Yellow" for="activeMonitoring">Active Monitoring</label>
+        <input type ="radio" name="assessmentCategory" id="activeMonitoring" value="activeMonitoring">
+
+        <label class = "Orange" for="planAction">Plan Action</label>
+        <input type = "radio" name="assessmentCategory" id="planAction" value="planAction"/>
+
+        <label class ="Red" for="actNow">Act Now</label>
+        <input type ="radio" name="assessmentCategory" id="actNow" value="actNow"/>
+    </fieldset>
+    <br>
+    <!-- <input type="number" name="patientId" id="patientId" value="{{ ptid }}"/> -->
+    <p id="patientID">{{ ptid }}</p>
+    <!-- <a href="p2.html" class="next">Next &raquo;</a> -->
+    <button id="p1_btn" class="next">Next &raquo;</button>
+</body>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "layout.html" %}
+{% block mainContent %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PCAM Assessment</title>
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/main.css') }}">
+    <style>
+    a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 8px 16px;
+      }
+
+      a:hover {
+        background-color: #ddd;
+        color: black;
+      }
+
+      .previous {
+        background-color: #f1f1f1;
+        color: black;
+      }
+
+      .next {
+        background-color: #4CAF50;
+        color: white;
+      }
+</style>
+</head>
+
+<body>
+    <div>
+        <h1>Service Coordination</h1>
+         <ol>
+            <li>
+            <p>Do other services need to be involved to help this client?</p>
+            <label for="Options"> Choose the option that best describes the situation:</label>
+                <select name="Options" id="Options">
+                <option value="option 1">Other care/services not required at this time</option>
+                <option value="option 2">Other care/services in place and adequate</option>
+                <option value="optionn 3">Other care/services in place but not sufficient</option>
+                <option value="option 4">Other care/services not in place and required</option>
+                </select>
+            </li>
+            <li>
+            <p>Are current services involved with this client well-coordinated? (include coordination with other services you are now recommending)</p>
+            </li>
+            <label for="Options">Choose the option that best describes the situation</label>
+                <select name="Options" id="Options">
+                <option value="option 1">All required care/services in place and well coordinated</option>
+                <option value="option 2">Required care/services in place and adequately coordinated</option>
+                <option value="option 3">Required care/services in place wwith some coordinated barriers</option>
+                <option value="option 4">Required care/services missing and/or fragmented</option>
+                </select>
+        </ol>
+    </div>
+    <br>
+    <div>
+        <label for="Notes" class="required">Notes:</label>
+        <form action="notes" method="POST" id="notes"></form>
+            <input type="text">
+    </div>
+    <br>
+    <fieldset>
+        <legend>Assessment category</legend>
+
+        <label class = "Green" for="rountineCare">Rountine Care</label>
+        <input type = "radio" name="assessmentCategory" id="rountineCare" value="rountineCare" checked="checked"/>
+
+        <label class = "Yellow" for="activeMonitoring">Active Monitoring</label>
+        <input type ="radio" name="assessmentCategory" id="activeMonitoring" value="activeMonitoring">
+
+        <label class = "Orange" for="planAction">Plan Action</label>
+        <input type = "radio" name="assessmentCategory" id="planAction" value="planAction"/>
+
+        <label class ="Red" for="actNow">Act Now</label>
+        <input type ="radio" name="assessmentCategory" id="actNow" value="actNow"/>
+    </fieldset>
+    <br>
+    <!-- <a href="p3.html" class="previous">&laquo; Previous</a>
+    <a href="url_for('select_patient')" class="next">Finish &raquo;</a> -->
+    <p id="patientID3">{{ ptid }}</p>
+    <button id="p4_prevBtn" class="previous">&laquo; Previous</button>
+    <button id="p4_nextBtn" class="next">Finish</button>
+</body>
+{% endblock %}

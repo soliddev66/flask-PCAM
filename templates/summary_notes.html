@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block mainContent %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+  table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+  </style>
+</head>
+<body>
+  <p>Summary Notes:</p>
+  <table>
+    <tr>
+      <th>Routine Care</th>
+      <td>{{ summary["rountineCare"][0] }}</td>
+      <td>{{ summary["rountineCare"][1] }}</td>
+      <td>{{ summary["rountineCare"][2] }}</td>
+      <td>{{ summary["rountineCare"][3] }}</td>
+    </tr>
+    <tr>
+      <th>Active Monitoring</th>
+      <td>{{ summary["activeMonitoring"][0] }}</td>
+      <td>{{ summary["activeMonitoring"][1] }}</td>
+      <td>{{ summary["activeMonitoring"][2] }}</td>
+      <td>{{ summary["activeMonitoring"][3] }}</td>
+    </tr>
+    <tr>
+      <th>Plan Action</th>
+      <td>{{ summary["planAction"][0] }}</td>
+      <td>{{ summary["planAction"][1] }}</td>
+      <td>{{ summary["planAction"][2] }}</td>
+      <td>{{ summary["planAction"][3] }}</td>
+    </tr>
+    <tr>
+      <th>Act Now</th>
+      <td>{{ summary["actNow"][0] }}</td>
+      <td>{{ summary["actNow"][1] }}</td>
+      <td>{{ summary["actNow"][2] }}</td>
+      <td>{{ summary["actNow"][3] }}</td>
+    </tr>
+  </table>
+  <p>{{ ptid }}</p>
+  <a href="{{ url_for('root')}}">Home</a>
+  <a href="#" onclick="previousSummary()">Back</a>
+</body>
+<script>
+  function previousSummary() {
+    event.preventDefault();
+    window.history.back();
+  }
+</script>
+{% endblock %}
