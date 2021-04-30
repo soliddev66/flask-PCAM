@@ -19,7 +19,7 @@ _DB_ENGINE='sqlite'#'MYSQL'
 _PORT=5000
 _HOST='127.0.0.1'
 
-_RESET_DB=False
+_RESET_DB=True
 
 from HIM73050.flask_db import set_db,reset_db, set_db_engine
 
