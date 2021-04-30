@@ -69,18 +69,22 @@
     <br>
     <fieldset>
         <legend>Assessment category</legend>
-
-        <label class = "Green" for="rountineCare">Rountine Care</label>
-        <input type = "radio" name="assessmentCategory" id="rountineCare" value="rountineCare" checked="checked"/>
-
-        <label class = "Yellow" for="activeMonitoring">Active Monitoring</label>
-        <input type ="radio" name="assessmentCategory" id="activeMonitoring" value="activeMonitoring">
-
-        <label class = "Orange" for="planAction">Plan Action</label>
-        <input type = "radio" name="assessmentCategory" id="planAction" value="planAction"/>
-
-        <label class ="Red" for="actNow">Act Now</label>
-        <input type ="radio" name="assessmentCategory" id="actNow" value="actNow"/>
+        <div style="display: inline;" class="GreenDiv">
+            <label class = "Green" for="rountineCare" id="green">Rountine Care</label>
+            <input type = "radio" name="assessmentCategory" id="rountineCare" value="rountineCare" checked="checked"/>
+        </div>
+        <div style="display: inline;" class="YellowDiv">
+            <label class = "Yellow" for="activeMonitoring" id="yellow">Active Monitoring</label>
+            <input type ="radio" name="assessmentCategory" id="activeMonitoring" value="activeMonitoring">
+        </div>
+        <div style="display: inline;" class="OrangeDiv">
+            <label class = "Orange" for="planAction" id="orange">Plan Action</label>
+            <input type = "radio" name="assessmentCategory" id="planAction" value="planAction"/>
+        </div>
+        <div style="display: inline;" class="RedDiv">
+            <label class ="Red" for="actNow" id="red">Act Now</label>
+            <input type ="radio" name="assessmentCategory" id="actNow" value="actNow"/>
+        </div>
     </fieldset>
     <br>
     <p id="patientID2">{{ ptid }}</p>

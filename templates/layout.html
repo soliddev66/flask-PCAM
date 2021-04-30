@@ -14,7 +14,16 @@
                 <a href="/patient_select">Add New Patient</a>
             </div>
         </div>
-        <a href="#news">Provider</a>
+        <div class="dropdown">
+            <button class="dropbtn">Provider
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+                <a href="{{ url_for('provider_list') }}">View Provider List</a>
+                <a href="/add_provider">Add New Provider</a>
+            </div>
+        </div>
+        <!-- <a href="#news">Provider</a> -->
         <input id="healthcardNo" type="text" tabindex="1" />
       </div>
 </head>
@@ -41,6 +50,17 @@
             select: function(event, ui) {
                 console.log(ui.item.value); // not in your question, but might help later
                 //FilterByName();
+                $.getJSON("{{url_for('searchbyname')}}",{
+                    q: ui.item.value, // in flask, "q" will be the argument to look for using request.args
+                }, function(data) {
+                    console.log(data);
+                    //response(data); // matching_results from jsonify
+                    //$('#selected_patient').append("<a href=)
+                    var tag = "<a href=\"/patient/" + data.id + "\">" + data.id + " " + data.name + "</a>"
+                    $('#selected_patient').append(tag)
+                    ///patient/<ptid>/'+_APP_NAME
+
+                });
             }
         });
 
@@ -416,7 +436,30 @@
             }
         });
 
-
+        // $('#green').hover(function() {
+        //     $(this).css('background-color', 'green');
+        // })
+        // $('#rountineCare').hover(function() {
+        //     $(this).css('background-color', 'green');
+        // })
+        // $('#red').hover(function() {
+        //     $(this).css('background-color', 'red');
+        // })
+        // $('#activeMonitoring').hover(function() {
+        //     $(this).css('background-color', 'red');
+        // })
+        // $('#yellow').hover(function() {
+        //     $(this).css('background-color', 'yellow');
+        // })
+        // $('#planAction').hover(function() {
+        //     $(this).css('background-color', 'yellow');
+        // })
+        // $('#orange').hover(function() {
+        //     $(this).css('background-color', '#FFA500');
+        // })
+        // $('#actNow').hover(function() {
+        //     $(this).css('background-color', '#FFA500');
+        // })
     })
 </script>
 </html>

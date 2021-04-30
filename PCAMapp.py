@@ -1,5 +1,5 @@
 from flask import g, render_template, request, make_response, redirect, url_for, jsonify
-from setup import app, _PORT,_HOST, _APP_NAME, _PATIENTS_TABLE,_MEASUREMENTS_TABLE,_PLACEHOLDER
+from setup import app, _PORT,_HOST, _APP_NAME, _PATIENTS_TABLE,_MEASUREMENTS_TABLE,_PLACEHOLDER,_PROVIDERS_TABLE
 from HIM73050 import flask_db as fdb
 from login_auth import login_required
 from flask import jsonify
@@ -41,11 +41,42 @@ there will be a patient ID and a patient_info object
 def select_patient():
     return render_template('patient_selector.html')
 
+@app.route('/add_provider')
+@login_required
+def add_provider():
+    return render_template('add_provider.html')
+
 @app.route('/patient_list')
 @login_required
 def patient_list():
     patient_list = fdb.query_db_get_all('SELECT * FROM '+_PATIENTS_TABLE)
     return render_template('patient_list.html', patients=patient_list)
+
+@app.route('/provider_list')
+@login_required
+def provider_list():
+    provider_list = fdb.query_db_get_all('SELECT * FROM '+_PROVIDERS_TABLE)
+    return render_template('provider_list.html', providers=provider_list)
+
+@app.route('/providers',methods=['GET', 'POST'])
+@login_required
+def providers():
+    '''Works'''
+    if request.method == 'GET':
+        #provider_list = fdb.query_db_get_all('SELECT * FROM '+_PROVIDERS_TABLE)
+        #print(provider_list)
+        #return jsonify(provider_list)
+        return render_template('add_provider.html')
+    elif request.method == 'POST':
+        fName = request.form['first_name']
+        lName = request.form['last_name']
+        Name = fName + " " + lName
+        eMail = request.form['e_mail']
+        result=fdb.query_db_change('INSERT INTO '+_PROVIDERS_TABLE+'(firstname, lastname, name, email) VALUES ({0}, {0}, {0}, {0})'.format(_PLACEHOLDER),(fName, lName, Name, eMail))
+        if result==None:
+            print("Could not insert new record into",_PROVIDERS_TABLE)
+        #return render_template('p1.html', ptid=result)
+        return redirect(url_for('providers'))
 
 @app.route('/patients',methods=['GET', 'POST'])
 @login_required
@@ -58,6 +89,7 @@ def patients():
     elif request.method == 'POST':
         fName = request.form['first_name']
         lName = request.form['last_name']
+        Name = fName + " " + lName
         eMail = request.form['e_mail']
         _date = request.form['date']
         address = request.form['address']
@@ -66,7 +98,7 @@ def patients():
         p2 = -1
         p3 = -1
         p4 = -1
-        result=fdb.query_db_change('INSERT INTO '+_PATIENTS_TABLE+'(firstname, lastname, email, date_, address, healthcardno, p1, p2, p3, p4) VALUES ({0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0})'.format(_PLACEHOLDER),(fName, lName, eMail, _date, address, healthcardno, p1, p2, p3, p4))
+        result=fdb.query_db_change('INSERT INTO '+_PATIENTS_TABLE+'(firstname, lastname, name, email, date_, address, healthcardno, p1, p2, p3, p4) VALUES ({0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0})'.format(_PLACEHOLDER),(fName, lName, Name, eMail, _date, address, healthcardno, p1, p2, p3, p4))
         if result==None:
             print("Could not insert new record into",_PATIENTS_TABLE)
         return render_template('p1.html', ptid=result)
@@ -120,7 +152,7 @@ def summary_notes():
                 dic["actNow"][3] = dic["actNow"][3] + 1
     return render_template('summary_notes.html', summary=dic)
 
-@app.route('/patient/<ptid>/'+_APP_NAME, methods=['GET', 'POST'])
+@app.route('/patient/<ptid>', methods=['GET', 'POST'])
 @login_required
 def patient(ptid):
     '''Works '''
@@ -241,6 +273,14 @@ def autocompletebyhealthcard():
         name = patient["firstname"] + " " + patient["lastname"]
         patients.append(name)
     return jsonify(patients)
+
+@app.route('/searchbyname', methods=['GET'])
+def searchbyname():
+    search = request.args.get('q')
+    query = 'SELECT * FROM '+_PATIENTS_TABLE + ' WHERE name=?'
+    args = (search)
+    patient = fdb.query_db_get_one(query, (args,))
+    return jsonify(patient)
 
 if __name__ == '__main__':
     app.run(port=_PORT, host=_HOST)

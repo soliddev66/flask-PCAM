@@ -174,5 +174,20 @@ hr {
     display: block;
 }
 
+.GreenDiv:hover {
+    background-color: green;
+}
+
+.YellowDiv:hover {
+    background-color: yellow;
+}
+
+.RedDiv:hover {
+    background-color: green;
+}
+
+.OrangeDiv:hover {
+    background-color: orange;
+}
 
 

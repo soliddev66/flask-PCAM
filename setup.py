@@ -12,6 +12,7 @@ _APP_NAME='PCAM APPLICATION'
 #database
 _MEASUREMENTS_TABLE='Measurements'
 _PATIENTS_TABLE='Patients'
+_PROVIDERS_TABLE='Providers'
 
 _DB_ENGINE='sqlite'#'MYSQL'
 

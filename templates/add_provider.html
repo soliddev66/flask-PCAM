@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block mainContent %}
+    <div>
+        <form class="new-patient" action="{{ url_for('providers')}}" method="post" enctype="application/x-www-form-urlencoded">
+            <label>Add new provider:</label>
+            <br/><label>First name:</label>
+            <input id="first_name" name="first_name" value="" placeholder="" required="true" />
+            <br/><label>Last name:</label>
+            <input id="last_name" name="last_name" value="" placeholder="" required="true" />
+            <br/><label>Email:</label>
+            <input id="e_mail" name="e_mail" value="" placeholder="" required="true" />
+            <br/><input type="submit" value="Submit" />
+        </form>
+    </div>
+    Return <a rel="home" href="{{ url_for('logout')}}">home</a>.
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+{% endblock %}

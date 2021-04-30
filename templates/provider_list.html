@@ -1,0 +1,27 @@
+
+{% extends "layout.html" %}
+{% block mainContent %}
+    <div>
+      Patient Page
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for provider in providers %}
+            <tr>
+              <td>{{ provider['firstname'] }}</td>
+              <td>{{ provider['lastname'] }}</td>
+              <td>{{ provider['email'] }}</td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{{ url_for('root')}}">Home</a>
+    <!-- <a href="{{ url_for('select_patient')}}">Back</a> -->
+{% endblock %}
